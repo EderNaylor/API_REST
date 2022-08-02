@@ -1,9 +1,7 @@
-from email import message
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from profiles_api import serializer
+from profiles_api import serializer, models
 from rest_framework import viewsets
 
 # Create your views here.
@@ -98,3 +96,9 @@ class HelloViewSet(viewsets.ViewSet):
         """destruye un objeto"""
 
         return Response({'http_method': 'DELETE'})
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """Crear y actualizar prefiles"""
+    serializer_class = serializer.UserProfilesSerializer
+    queryset = models.UserProfile.objects.all()
+
